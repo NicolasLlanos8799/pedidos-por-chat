@@ -18,35 +18,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-    <style>
-        /* Custom adjustment for the iframe demo */
-        .demo-iframe-container {
-            width: 100%;
-            max-width: 375px;
-            height: 620px;
-            background: #fff;
-            border-radius: 40px;
-            overflow: hidden;
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .demo-iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        @media (max-width: 768px) {
-            .demo-iframe-container {
-                max-width: 100% !important;
-                height: auto;
-                aspect-ratio: 9/16;
-                max-height: 600px;
-                border-radius: 20px;
-            }
-        }
-    </style>
 </head>
 
 <body class="bg-white text-slate-800 antialiased">
@@ -61,7 +32,7 @@
                 <span class="truncate">Pedidos <span class="text-indigo-600">por Chat</span></span>
             </div>
             <a href="#demo" title="Ver demostración de pedidos"
-                class="btn-primary text-white px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold shadow-lg shadow-indigo-100 transition whitespace-nowrap shrink-0">
+                class="btn-primary text-white px-4 md:px-6 py-2 md:py-2.5 rounded-full text-sm font-bold shadow-lg shadow-indigo-100 transition whitespace-nowrap shrink-0">
                 Probar demo en vivo
             </a>
         </div>
@@ -252,15 +223,15 @@
                     </p>
                     <div class="space-y-3">
                         <button type="button"
-                            class="example-msg-btn relative z-20 text-xs text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
+                            class="example-msg-btn relative z-20 text-sm text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
                             "Hola! Quiero ver el menú"
                         </button>
                         <button type="button"
-                            class="example-msg-btn relative z-20 text-xs text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
+                            class="example-msg-btn relative z-20 text-sm text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
                             "¿Tienen opciones vegetarianas?"
                         </button>
                         <button type="button"
-                            class="example-msg-btn relative z-20 text-xs text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
+                            class="example-msg-btn relative z-20 text-sm text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
                             "Quiero pedir una Burger House con papas"
                         </button>
                     </div>
@@ -279,29 +250,29 @@
         <div class="max-w-4xl mx-auto text-center reveal">
             <h2 class="text-2xl font-extrabold text-slate-900 mb-12">Ideal para cualquier negocio con delivery o pedidos
             </h2>
-            <p class="text-slate-600 text-lg mb-12">
+            <p class="text-slate-600 text-lg mb-8 md:mb-12">
                 Pensado para locales que reciben pedidos todos los días por canales digitales y quieren escalar sus
                 ventas.
             </p>
-            <div class="flex flex-wrap justify-center gap-6">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-6">
                 <span
-                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
-                        data-lucide="utensils" class="w-5 h-5 text-indigo-500"></i> Restaurantes</span>
+                    class="px-5 md:px-8 py-3 md:py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-2 md:gap-3 border border-slate-100 text-base"><i
+                        data-lucide="utensils" class="w-4 h-4 md:w-5 md:h-5 text-indigo-500"></i> Restaurantes</span>
                 <span
-                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
-                        data-lucide="pizza" class="w-5 h-5 text-emerald-500"></i> Pizzerías</span>
+                    class="px-5 md:px-8 py-3 md:py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-2 md:gap-3 border border-slate-100 text-base"><i
+                        data-lucide="pizza" class="w-4 h-4 md:w-5 md:h-5 text-emerald-500"></i> Pizzerías</span>
                 <span
-                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
-                        data-lucide="coffee" class="w-5 h-5 text-rose-500"></i> Cafeterías</span>
+                    class="px-5 md:px-8 py-3 md:py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-2 md:gap-3 border border-slate-100 text-base"><i
+                        data-lucide="coffee" class="w-4 h-4 md:w-5 md:h-5 text-rose-500"></i> Cafeterías</span>
                 <span
-                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
-                        data-lucide="ice-cream" class="w-5 h-5 text-sky-500"></i> Heladerías</span>
+                    class="px-5 md:px-8 py-3 md:py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-2 md:gap-3 border border-slate-100 text-base"><i
+                        data-lucide="ice-cream" class="w-4 h-4 md:w-5 md:h-5 text-sky-500"></i> Heladerías</span>
                 <span
-                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
-                        data-lucide="shopping-bag" class="w-5 h-5 text-indigo-500"></i> Tiendas</span>
+                    class="px-5 md:px-8 py-3 md:py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-2 md:gap-3 border border-slate-100 text-base"><i
+                        data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5 text-indigo-500"></i> Tiendas</span>
                 <span
-                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
-                        data-lucide="sparkles" class="w-5 h-5 text-fuchsia-500"></i> Otros</span>
+                    class="px-5 md:px-8 py-3 md:py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-2 md:gap-3 border border-slate-100 text-base"><i
+                        data-lucide="sparkles" class="w-4 h-4 md:w-5 md:h-5 text-fuchsia-500"></i> Otros</span>
             </div>
 
             <div class="mt-16 text-center reveal">
@@ -316,9 +287,10 @@
 
     <section id="contact" class="py-20 md:py-32 px-4 md:px-6 bg-slate-50">
         <div class="max-w-4xl mx-auto reveal">
-            <header class="text-center mb-16">
+            <header class="text-center mb-10 md:mb-16">
                 <p class="text-indigo-600 font-bold text-xs uppercase tracking-widest mb-4">CONTACTO</p>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900">Automatizá tus pedidos hoy mismo</h2>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 px-4">Automatizá tus pedidos hoy mismo
+                </h2>
             </header>
 
             <form id="contactForm"
