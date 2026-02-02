@@ -1,0 +1,937 @@
+:root {
+    /* WhatsApp Business Brand Colors (Dark Theme) */
+    --wa-header: #202c33;
+    --wa-accent: #00a884;
+    --wa-bg: #0b141a;
+    --wa-bg-dark: #0b141a;
+
+    /* Dark mode (WA Web Style) */
+    --chat-bg: #0b141a;
+    --header-bg: #202c33;
+    --bubble-bot: #202c33;
+    --bubble-user: #005c4b;
+    --text-main: #e9edef;
+    --text-muted: #8696a0;
+    --wa-ticks-blue: #53bdeb;
+
+    --bg-color: #0b141a;
+    --panel-bg: #202c33;
+    --border-soft: #232d36;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: #0b141a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 420px;
+    height: 700px;
+    max-height: 95vh;
+    background: var(--chat-bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* HEADER */
+.chat-header {
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--header-bg);
+    height: 60px;
+    color: white;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.back-btn {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.biz-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #dfe5e7;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.chat-header-info {
+    min-width: 0;
+}
+
+.chat-header-info h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chat-header-info p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 500;
+}
+
+.cart-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 18px;
+    position: relative;
+    /* Reset Native Styles */
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: var(--wa-accent);
+    color: #000;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1.5px solid var(--header-bg);
+}
+
+.store-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* MESSAGES */
+.chat-messages {
+    flex: 1;
+    padding: 10px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    background-blend-mode: multiply;
+    background-color: #0b141a;
+    opacity: 0.96;
+}
+
+.message-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.message-row.bot {
+    justify-content: flex-start;
+}
+
+.message-row.user {
+    justify-content: flex-end;
+}
+
+.message-bubble {
+    max-width: 85%;
+    padding: 6px 7px 8px 9px;
+    border-radius: 7.5px;
+    font-size: 14.2px;
+    line-height: 19px;
+    position: relative;
+    white-space: pre-wrap;
+}
+
+.message-bubble.bot-bubble {
+    background: var(--bubble-bot);
+    color: var(--text-main);
+    border-top-left-radius: 0;
+    border: 1px solid #232d36;
+}
+
+.message-bubble.user-bubble {
+    background: var(--bubble-user);
+    color: #e9edef;
+    border-top-right-radius: 0;
+}
+
+.msg-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    color: rgba(102, 119, 129, 0.7);
+    float: right;
+    margin: 4px -2px -2px 8px;
+    position: relative;
+    bottom: -4px;
+}
+
+.ticks {
+    font-size: 14px;
+    display: inline-flex;
+}
+
+.ticks.read {
+    color: var(--wa-ticks-blue);
+}
+
+/* Typing indicator bubble */
+.typing-bubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 7.5px;
+    background: var(--bubble-bot);
+    border-top-left-radius: 0;
+}
+
+.typing-dots {
+    display: inline-flex;
+    gap: 3px;
+}
+
+.typing-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #919191;
+    animation: wa-typing 1.3s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes wa-typing {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* FOOTER - WhatsApp iOS Style */
+.chat-footer {
+    padding: 6px 10px 10px 10px;
+    /* Slight top padding reduction */
+    background: #202c33;
+}
+
+.footer-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.footer-btn {
+    background: transparent;
+    border: none;
+    color: #8696a0;
+    /* Iconic WhatsApp gray */
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+.footer-btn:active {
+    color: #00a884;
+}
+
+.footer-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    stroke: none;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 9px 36px 9px 12px;
+    /* Right padding for sticker icon */
+    border-radius: 18px;
+    /* More rounded */
+    border: 1px solid #2a3942;
+    /* Subtle border */
+    background: #2a3942;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    line-height: 20px;
+}
+
+.chat-input::placeholder {
+    color: #8696a0;
+}
+
+.sticker-btn {
+    position: absolute;
+    right: 8px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #8696a0;
+}
+
+.sticker-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Send/Mic Button specific */
+.send-mic-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #00a884;
+    /* Mic circle background */
+    color: white;
+    display: flex;
+    /* Ensure it overrides footer-btn default if needed */
+    justify-content: center;
+    align-items: center;
+}
+
+.send-mic-btn.mic-mode {
+    background: #00a884;
+    /* Usually green for mic in WA? Or transparent? Reference image shows specific look. */
+    /* WA iOS: Mic is defined by context. Usually just an icon if empty, Send plane if text. */
+    /* Screenshot: Mic is distinct icon. I will use Green Circle for coherence with "Action" button. */
+}
+
+.send-mic-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+.chat-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Internal gap */
+}
+
+.status-line {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #667781;
+    text-align: center;
+}
+
+/* Floating Chat Cart Button (New) */
+.chat-floating-cart-btn {
+    position: absolute;
+    bottom: 82px;
+    /* Clears footer area */
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #25D366;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    /* controlled via JS (none/flex) */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 90;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chat-floating-cart-btn:active {
+    transform: scale(0.95);
+}
+
+.floating-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: white;
+    color: #25D366;
+    border: 2px solid #25D366;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Floating Chat Cart Button (New) */
+/* Floating Chat Cart Button (New) */
+.chat-floating-cart-btn {
+    position: absolute;
+    bottom: 82px;
+    /* Clears footer area */
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #25D366;
+    border: none;
+    /* Minimize shadow to avoid dark halo appearance */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    /* controlled via JS (none/flex) */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    /* Increased to ensure clickable */
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Reset Native Styles */
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.chat-floating-cart-btn:active {
+    transform: scale(0.95);
+}
+
+.floating-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: white;
+    color: #25D366;
+    border: 2px solid #25D366;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* DRAWER (Catalog & Cart Screen) */
+.drawer {
+    position: absolute;
+    inset: 0;
+    display: none;
+    background: var(--wa-bg-dark);
+    z-index: 100;
+}
+
+.drawer.open {
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--wa-bg-dark);
+}
+
+.drawer-header {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #202c33;
+    color: white;
+    min-height: 56px;
+    z-index: 10;
+    border-bottom: 1px solid #232d36;
+}
+
+.drawer-header .left-actions {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.drawer-header .right-actions {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+#drawerTitle {
+    font-size: 19px;
+    font-weight: 500;
+    text-align: center;
+    flex: 2;
+}
+
+.drawer-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 0;
+}
+
+.drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--wa-bg-dark);
+}
+
+/* Business Info */
+.biz-banner {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f0f2f5;
+}
+
+.biz-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.biz-details {
+    padding: 20px 16px;
+    border-bottom: 8px solid #f0f2f5;
+}
+
+.biz-details h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.biz-details p {
+    font-size: 14.5px;
+    color: #8696a0;
+    line-height: 1.4;
+}
+
+/* Lists Header */
+.category-header {
+    padding: 20px 16px 8px;
+}
+
+.category-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #667781;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Flat Product Row */
+.product-card {
+    display: flex;
+    padding: 12px 16px;
+    gap: 16px;
+    background: var(--wa-bg-dark);
+    border-bottom: 1px solid #232d36;
+}
+
+.product-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    background: #232d36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+}
+
+.product-desc {
+    font-size: 14px;
+    color: #8696a0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.add-btn-circle {
+    width: 28px;
+    height: 28px;
+    background: #00a884;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Cart Screen Styles */
+.cart-item {
+    padding: 16px;
+    border-bottom: 1px solid #f0f2f5;
+    background: white;
+}
+
+.cart-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.cart-item-name {
+    font-weight: 500;
+    font-size: 16px;
+    color: #111b21;
+}
+
+.cart-item-sub {
+    font-size: 14px;
+    color: #667781;
+}
+
+.cart-item-right {
+    font-weight: 600;
+    font-size: 15px;
+    color: #111b21;
+}
+
+.cart-item-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.qty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0f2f5;
+    padding: 4px 12px;
+    border-radius: 18px;
+}
+
+.qty button {
+    background: transparent;
+    border: none;
+    color: #075E54;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.qty span {
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+.remove-btn {
+    background: transparent;
+    border: none;
+    color: #ea0038;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* FOOTER (Cart Confirm) */
+.drawer-footer {
+    padding: 20px 16px;
+    background: white;
+    border-top: 1px solid #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.primary-btn {
+    background: #25D366;
+    color: white;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 24px;
+    border: none;
+    width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.ghost-btn {
+    background: transparent;
+    color: #075E54;
+    font-weight: 600;
+    text-align: center;
+    padding: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Sticky Bottom Cart Button (Catalog Mode) */
+.floating-cart-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #25D366;
+    color: white;
+    padding: 16px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    display: none;
+    /* Controlled by JS */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 50;
+    border-radius: 0;
+    /* Full width edge-to-edge */
+    text-align: center;
+    width: 100%;
+}
+
+/* Summary styles for Dark Cart */
+.summary-container {
+    margin-bottom: 12px;
+    padding: 12px 0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #8696a0;
+}
+
+.summary-row.total {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #232d36;
+}
+
+.floating-cart-btn.visible {
+    display: block;
+}
+
+/* DARK MODE (Cart Screen) */
+.drawer.dark {
+    background: #0b141a;
+    color: white;
+}
+
+.drawer.dark .drawer-panel,
+.drawer.dark .drawer-body,
+.drawer.dark .drawer-footer {
+    background: #0b141a;
+}
+
+.drawer.dark .drawer-header {
+    background: #0b141a;
+    border-bottom: 1px solid #232d36;
+}
+
+.drawer.dark .cart-item {
+    background: #0b141a;
+    border-bottom: 1px solid #2b3943;
+    color: white;
+}
+
+.drawer.dark .cart-item-name,
+.drawer.dark .cart-item-right {
+    color: white;
+}
+
+.drawer.dark .cart-item-sub {
+    color: #8696a0;
+}
+
+.drawer.dark .qty {
+    background: #232d36;
+}
+
+.drawer.dark .qty button {
+    color: #25D366;
+}
+
+.drawer.dark .qty span {
+    color: white;
+}
+
+.drawer.dark .footer-row {
+    color: #8696a0;
+}
+
+.drawer.dark #cartTotalLabel {
+    color: white;
+}
+
+.drawer.dark .ghost-btn {
+    color: #25D366;
+}
+
+.drawer.dark .disclaimer {
+    font-size: 11px;
+    color: #8696a0;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.cart-item-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    background: #232d36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.cart-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
