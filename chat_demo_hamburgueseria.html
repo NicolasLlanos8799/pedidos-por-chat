@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat - Burger House</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --wa-header: #075E54;
+      --wa-header-2: #128C7E;
+      --wa-accent: #25D366;
+
+      --bg-color: #0b141a;
+      --chat-bg: #0b141a;
+
+      --pattern-a: rgba(255, 255, 255, 0.03);
+      --pattern-b: rgba(37, 211, 102, 0.03);
+
+      --bubble-bot: #1f2c34;
+      --bubble-user: #005c4b;
+
+      --text-main: #e9edef;
+      --text-muted: #94a3b8;
+
+      --border-color: rgba(255, 255, 255, 0.08);
+      --shadow: 0 14px 42px -18px rgba(0, 0, 0, 0.8);
+
+      --panel: #0f1a20;
+      --panel-2: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg-color);
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 18px;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 420px;
+      height: 700px;
+      max-height: 90vh;
+      background: var(--chat-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* HEADER */
+    .chat-header {
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, var(--wa-header) 0%, var(--wa-header-2) 100%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .back-btn {
+      color: #ffffff;
+      margin-right: 2px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      opacity: 0.7;
+    }
+
+    .biz-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .chat-header-info {
+      min-width: 0;
+    }
+
+    .chat-header-info h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-header-info p {
+      margin-top: 3px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot-online {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--wa-accent);
+      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.14);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.18);
+      color: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .cart-btn {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(0, 0, 0, 0.18);
+      color: rgba(255, 255, 255, 0.92);
+      border-radius: 999px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .cart-badge {
+      min-width: 18px;
+      height: 18px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: rgba(37, 211, 102, 0.18);
+      border: 1px solid rgba(37, 211, 102, 0.28);
+      color: rgba(255, 255, 255, 0.95);
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* MESSAGES */
+    .chat-messages {
+      flex: 1;
+      padding: 18px 14px 18px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background:
+        radial-gradient(circle at 20% 30%, var(--pattern-b) 0, transparent 40%),
+        radial-gradient(circle at 80% 70%, var(--pattern-a) 0, transparent 45%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0) 40%);
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+    }
+
+    .message-row {
+      display: flex;
+      width: 100%;
+    }
+
+    .message-row.bot {
+      justify-content: flex-start;
+    }
+
+    .message-row.user {
+      justify-content: flex-end;
+    }
+
+    .message-bubble {
+      max-width: 82%;
+      padding: 10px 12px 8px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.45;
+      position: relative;
+      word-wrap: break-word;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.6);
+      white-space: pre-wrap;
+      animation: message-pop 0.18s ease-out;
+    }
+
+    .message-bubble.bot-bubble {
+      background: var(--bubble-bot);
+      color: var(--text-main);
+      border-top-left-radius: 6px;
+    }
+
+    .message-bubble.user-bubble {
+      background: var(--bubble-user);
+      color: #ffffff;
+      border-top-right-radius: 6px;
+    }
+
+    .msg-meta {
+      margin-top: 6px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: rgba(233, 237, 239, 0.65);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .message-row.bot .msg-meta {
+      justify-content: flex-start;
+      color: rgba(233, 237, 239, 0.55);
+    }
+
+    .ticks {
+      font-size: 12px;
+      letter-spacing: -1px;
+      color: rgba(233, 237, 239, 0.8);
+    }
+
+    .ticks.read {
+      color: rgba(135, 206, 250, 0.95);
+    }
+
+    @keyframes message-pop {
+      0% {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Typing indicator bubble */
+    .typing-bubble {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--bubble-bot);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-top-left-radius: 6px;
+      max-width: 72%;
+      box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.6);
+    }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      height: 12px;
+    }
+
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(233, 237, 239, 0.7);
+      display: inline-block;
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.15s;
+      opacity: 0.85;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.3s;
+      opacity: 0.7;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* FOOTER */
+    .chat-footer {
+      padding: 10px 12px 12px;
+      background: #111b21;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .quick-replies {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 2px 10px;
+      scrollbar-width: none;
+    }
+
+    .quick-replies::-webkit-scrollbar {
+      display: none;
+    }
+
+    .qr-btn {
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      padding: 8px 10px;
+      font-size: 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .qr-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .chat-form {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-input {
+      width: 100%;
+      padding: 12px 44px 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.18s ease;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .chat-input::placeholder {
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: rgba(37, 211, 102, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.12);
+    }
+
+    .send-icon-btn {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--wa-accent);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 10px 18px -12px rgba(37, 211, 102, 0.55);
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+
+    .send-icon-btn:hover {
+      transform: translateY(-50%) scale(1.05);
+      filter: brightness(1.03);
+    }
+
+    .send-icon-btn:active {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .send-icon-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #083b2a;
+      margin-left: 1px;
+    }
+
+    .status-line {
+      margin-top: 8px;
+      font-size: 11px;
+      color: rgba(148, 163, 184, 0.95);
+      text-align: center;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    /* DRAWER (catalog/cart) */
+    .drawer {
+      position: absolute;
+      inset: 0;
+      display: none;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 20;
+    }
+
+    .drawer.open {
+      display: block;
+    }
+
+    .drawer-panel {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--panel);
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      max-height: 78%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 -18px 40px -26px rgba(0, 0, 0, 0.9);
+      transform: translateY(12px);
+      animation: drawerUp 0.18s ease-out forwards;
+    }
+
+    @keyframes drawerUp {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .drawer-header {
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--panel-2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .drawer-title {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .drawer-title strong {
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .drawer-title span {
+      font-size: 12px;
+      color: rgba(148, 163, 184, 0.95);
+      margin-top: 2px;
+    }
+
+    .drawer-close {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(233, 237, 239, 0.95);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .drawer-body {
+      padding: 12px;
+      overflow: auto;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    .drawer-footer {
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.15);
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      color: rgba(233, 237, 239, 0.9);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .primary-btn {
+      width: 100%;
+      border: 1px solid rgba(37, 211, 102, 0.30);
+      background: rgba(37, 211, 102, 0.14);
+      color: rgba(233, 237, 239, 0.98);
+      padding: 12px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+
+    .ghost-btn {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(233, 237, 239, 0.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.2px;
+    }
+
+    /* Catalog product card */
+    .product-card {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .product-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+
+    .product-price {
+      font-size: 13px;
+      font-weight: 900;
+      color: rgba(37, 211, 102, 0.95);
+      white-space: nowrap;
+    }
+
+    .product-desc {
+      font-size: 12px;
+      color: rgba(148, 163, 184, 0.95);
+      line-height: 1.35;
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 999px;
+      padding: 6px 8px;
+    }
+
+    .qty button {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(233, 237, 239, 0.95);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .qty span {
+      min-width: 18px;
+      text-align: center;
+      font-weight: 900;
+      color: rgba(233, 237, 239, 0.95);
+      font-size: 12px;
+    }
+
+    .add-btn {
+      border: 1px solid rgba(37, 211, 102, 0.25);
+      background: rgba(37, 211, 102, 0.12);
+      color: rgba(233, 237, 239, 0.98);
+      padding: 9px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    /* Cart item row */
+    .cart-item {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .cart-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .cart-item-name {
+      font-weight: 900;
+      color: #ffffff;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .cart-item-sub {
+      margin-top: 2px;
+      font-size: 12px;
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    .cart-item-right {
+      text-align: right;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(233, 237, 239, 0.92);
+    }
+
+    .cart-item-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .remove-btn {
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      background: rgba(239, 68, 68, 0.10);
+      color: rgba(233, 237, 239, 0.95);
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+
+      .message-bubble,
+      .drawer-panel,
+      .typing-dots span {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="chat-container">
+    <header class="chat-header">
+      <div class="header-left">
+        <a href="https://www.helloiagency.com" class="back-btn" aria-label="Volver">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div class="biz-avatar" aria-hidden="true">🍔</div>
+        <div class="chat-header-info">
+          <h1>Burger House</h1>
+          <p><span class="dot-online"></span><span id="headerStatus">En línea · Responde rápido</span></p>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="cart-btn" id="openCartBtn" type="button" aria-label="Abrir carrito">
+          🛒 <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <div class="badge" id="negocioLabel">...</div>
+      </div>
+    </header>
+
+    <main class="chat-messages" id="chatMessages"></main>
+
+    <footer class="chat-footer">
+      <div class="quick-replies" id="quickReplies"></div>
+
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" class="chat-input" type="text" placeholder="Escribí tu mensaje (o usá el catálogo)…"
+          autocomplete="off" required />
+        <button id="sendButton" class="send-icon-btn" type="submit" aria-label="Enviar">
+          <svg viewBox="0 0 24 24">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </form>
+
+      <div class="status-line">
+        <span id="statusText">Abierto hasta las 11:00 PM</span>
+        <div style="font-size: 9px; opacity: 0.5; margin-top:2px" id="userIdLabel"></div>
+      </div>
+    </footer>
+
+    <!-- Drawer (Catalog / Cart) -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Panel de catálogo y carrito">
+        <div class="drawer-header">
+          <div class="drawer-title">
+            <strong id="drawerTitle">Catálogo</strong>
+            <span id="drawerSubtitle">Elegí productos y luego confirmá (1 solo mensaje).</span>
+          </div>
+          <button class="drawer-close" id="drawerClose" type="button">Cerrar</button>
+        </div>
+
+        <div class="drawer-body" id="drawerBody"></div>
+
+        <div class="drawer-footer" id="drawerFooter" style="display:none;">
+          <div class="footer-row">
+            <span id="cartItemsLabel">0 ítems</span>
+            <span id="cartTotalLabel">$0.00</span>
+          </div>
+          <button class="primary-btn" id="sendOrderBtn" type="button">✅ Confirmar pedido y enviar</button>
+          <button class="ghost-btn" id="continueShoppingBtn" type="button">➕ Seguir agregando</button>
+          <button class="ghost-btn" id="clearCartBtn" type="button">🗑 Vaciar carrito</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // --- LÓGICA DE NEGOCIO ORIGINAL CONSERVARADA ---
+    // NO MODIFICAR: webhook / ids / payload
+    const WEBHOOK_URL = "https://nicolasllanossw10.app.n8n.cloud/webhook/iagency/webchat";
+    const BUSINESS_ID = "burger_house";
+    const USER_ID = "cliente_" + Math.random().toString(36).slice(2, 6);
+
+    // DOM
+    const messagesEl = document.getElementById("chatMessages");
+    const formEl = document.getElementById("chatForm");
+    const inputEl = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendButton");
+    const statusText = document.getElementById("statusText");
+    const negocioLabel = document.getElementById("negocioLabel");
+    const userIdLabel = document.getElementById("userIdLabel");
+    const headerStatus = document.getElementById("headerStatus");
+
+    const quickRepliesEl = document.getElementById("quickReplies");
+    const openCartBtn = document.getElementById("openCartBtn");
+    const cartCountEl = document.getElementById("cartCount");
+
+    const drawerEl = document.getElementById("drawer");
+    const drawerCloseEl = document.getElementById("drawerClose");
+    const drawerTitleEl = document.getElementById("drawerTitle");
+    const drawerSubtitleEl = document.getElementById("drawerSubtitle");
+    const drawerBodyEl = document.getElementById("drawerBody");
+    const drawerFooterEl = document.getElementById("drawerFooter");
+
+    const cartItemsLabel = document.getElementById("cartItemsLabel");
+    const cartTotalLabel = document.getElementById("cartTotalLabel");
+    const sendOrderBtn = document.getElementById("sendOrderBtn");
+    const continueShoppingBtn = document.getElementById("continueShoppingBtn");
+    const clearCartBtn = document.getElementById("clearCartBtn");
+
+    // Init UI
+    negocioLabel.textContent = "ABIERTO";
+    userIdLabel.textContent = "ID: " + USER_ID;
+
+    // ---- Catálogo (demo) ----
+    const CATALOG = {
+      "Hamburguesas": [
+        { name: "Burger Clásica", desc: "Carne, queso, lechuga, tomate y salsa de la casa.", price: 8.99 },
+        { name: "Burger Doble", desc: "Doble carne, doble queso. Para hambre seria.", price: 11.99 },
+        { name: "Burger Pollo Crispy", desc: "Pollo crocante, lechuga, mayo y pepinillos.", price: 9.99 },
+        { name: "Burger Veggie", desc: "Medallón veggie, queso, rúcula y tomate.", price: 9.49 },
+      ],
+      "Papas": [
+        { name: "Papas Chicas", desc: "Clásicas, crocantes y doradas.", price: 2.99 },
+        { name: "Papas Grandes", desc: "Para compartir (o no).", price: 3.99 },
+        { name: "Papas con Cheddar", desc: "Cheddar + toque de cebolla crispy.", price: 4.99 },
+      ],
+      "Bebidas": [
+        { name: "Coca Cola", desc: "Lata / 355 ml (según disponibilidad).", price: 2.0 },
+        { name: "Agua", desc: "Agua sin gas.", price: 1.5 },
+        { name: "Cerveza", desc: "Cerveza rubia (consulta marcas).", price: 3.5 },
+      ],
+      "Extras": [
+        { name: "Extra Queso", desc: "Sumá queso a tu burger.", price: 1.0 },
+        { name: "Extra Bacon", desc: "Bacon crocante.", price: 1.5 },
+        { name: "Salsa Especial", desc: "Salsa de la casa (extra).", price: 0.8 },
+      ],
+    };
+
+    // ---- Carrito (modo WhatsApp Business): agregás varios, confirmás, se envía UN mensaje ----
+    const CART_KEY = `burger_cart_${USER_ID}`;
+    let cart = loadCart();
+    let lastOpenedCategory = "Hamburguesas";
+    let drawerMode = "catalog"; // "catalog" | "cart"
+
+    function loadCart() {
+      try {
+        const raw = localStorage.getItem(CART_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCart() {
+      try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { }
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+      syncCartUI();
+    }
+
+    function money(n) {
+      const num = Number(n || 0);
+      return num.toLocaleString("es-AR", { style: "currency", currency: "USD" });
+    }
+
+    function nowHHMM() {
+      const d = new Date();
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mm = String(d.getMinutes()).padStart(2, "0");
+      return `${hh}:${mm}`;
+    }
+
+    function cartTotals() {
+      const subtotal = cart.reduce((acc, i) => acc + (Number(i.price || 0) * Number(i.qty || 0)), 0);
+      const items = cart.reduce((acc, i) => acc + Number(i.qty || 0), 0);
+      return { subtotal, items };
+    }
+
+    function syncCartUI() {
+      const t = cartTotals();
+      cartCountEl.textContent = String(t.items);
+      cartItemsLabel.textContent = `${t.items} ítems`;
+      cartTotalLabel.textContent = money(t.subtotal);
+    }
+
+    // ---- Mensajes (chat) ----
+    function addMessage(text, from = "bot", opts = {}) {
+      const row = document.createElement("div");
+      row.className = "message-row " + (from === "user" ? "user" : "bot");
+
+      const bubble = document.createElement("div");
+      bubble.className = from === "user" ? "message-bubble user-bubble" : "message-bubble bot-bubble";
+
+      const content = document.createElement("div");
+      content.textContent = text;
+
+      const meta = document.createElement("div");
+      meta.className = "msg-meta";
+
+      const time = document.createElement("span");
+      time.textContent = opts.time || nowHHMM();
+      meta.appendChild(time);
+
+      if (from === "user") {
+        const ticks = document.createElement("span");
+        ticks.className = "ticks";
+        ticks.textContent = "✓";
+        meta.appendChild(ticks);
+
+        setTimeout(() => { ticks.textContent = "✓✓"; }, 350);
+        setTimeout(() => { ticks.classList.add("read"); }, 1200);
+      }
+
+      bubble.appendChild(content);
+      bubble.appendChild(meta);
+      row.appendChild(bubble);
+
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return row;
+    }
+
+    function setStatus(text, isError = false) {
+      statusText.textContent = text;
+      statusText.style.color = isError ? "#ef4444" : "rgba(148, 163, 184, 0.95)";
+    }
+
+    // ---- Typing indicator ----
+    let typingRow = null;
+
+    function showTypingIndicator() {
+      if (typingRow) return;
+      typingRow = document.createElement("div");
+      typingRow.className = "message-row bot";
+
+      const bubble = document.createElement("div");
+      bubble.className = "typing-bubble";
+
+      const dots = document.createElement("div");
+      dots.className = "typing-dots";
+      dots.innerHTML = "<span></span><span></span><span></span>";
+
+      const label = document.createElement("span");
+      label.style.fontSize = "12px";
+      label.style.color = "rgba(233, 237, 239, 0.75)";
+      label.textContent = "escribiendo";
+
+      bubble.appendChild(dots);
+      bubble.appendChild(label);
+      typingRow.appendChild(bubble);
+
+      messagesEl.appendChild(typingRow);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      if (!typingRow) return;
+      typingRow.remove();
+      typingRow = null;
+    }
+
+    // ---- Webhook (NO CAMBIAR payload) ----
+    async function sendToWebhook(text) {
+      setStatus("Preparando respuesta...");
+      sendBtn.disabled = true;
+      headerStatus.textContent = "Escribiendo…";
+
+      const payload = {
+        id_negocio: BUSINESS_ID,
+        user_id: USER_ID,
+        texto: text
+      };
+
+      try {
+        showTypingIndicator();
+
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => null);
+        hideTypingIndicator();
+
+        if (!res.ok) {
+          addMessage("Tuvimos un problema con el pedido (Error servidor).", "bot");
+          setStatus("Error de servicio", true);
+          headerStatus.textContent = "En línea · Responde rápido";
+          return;
+        }
+
+        let replyText = (data && (data.reply || data.respuesta || data.message)) || "Pedido recibido.";
+        if (!replyText && data) replyText = JSON.stringify(data);
+
+        addMessage(replyText, "bot");
+        setStatus("Abierto hasta las 11:00 PM");
+        headerStatus.textContent = "En línea · Responde rápido";
+
+      } catch (err) {
+        console.error(err);
+        hideTypingIndicator();
+        addMessage("No pudimos conectar con el local.", "bot");
+        setStatus("Sin conexión", true);
+        headerStatus.textContent = "Sin conexión";
+      } finally {
+        sendBtn.disabled = false;
+        if (window.innerWidth > 768) inputEl.focus();
+      }
+    }
+
+    // ---- Drawer controls ----
+    function openDrawer(mode) {
+      drawerMode = mode;
+
+      drawerEl.classList.add("open");
+      drawerBodyEl.innerHTML = "";
+
+      if (mode === "catalog") {
+        drawerFooterEl.style.display = "none";
+        renderCatalog(lastOpenedCategory);
+      } else {
+        drawerFooterEl.style.display = "grid";
+        renderCart();
+      }
+    }
+
+    function closeDrawer() {
+      drawerEl.classList.remove("open");
+      drawerBodyEl.innerHTML = "";
+    }
+
+    drawerCloseEl.addEventListener("click", closeDrawer);
+    drawerEl.addEventListener("click", (e) => {
+      if (e.target === drawerEl) closeDrawer();
+    });
+
+    // ---- Quick replies ----
+    const QUICK_ACTIONS = [
+      { label: "🍔 Hamburguesas", type: "category", category: "Hamburguesas" },
+      { label: "🍟 Papas", type: "category", category: "Papas" },
+      { label: "🥤 Bebidas", type: "category", category: "Bebidas" },
+      { label: "➕ Extras", type: "category", category: "Extras" },
+      { label: "🛒 Carrito", type: "cart" },
+    ];
+
+    function renderQuickReplies() {
+      quickRepliesEl.innerHTML = "";
+      QUICK_ACTIONS.forEach(a => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "qr-btn";
+        btn.textContent = a.label;
+        btn.addEventListener("click", () => handleQuickAction(a));
+        quickRepliesEl.appendChild(btn);
+      });
+    }
+
+    function handleQuickAction(action) {
+      if (action.type === "category") {
+        lastOpenedCategory = action.category;
+        openDrawer("catalog");
+        return;
+      }
+      if (action.type === "cart") {
+        openDrawer("cart");
+        return;
+      }
+    }
+
+    // ---- Catalog render (WhatsApp style: add items silently to cart; no chat messages) ----
+    function renderCatalog(category) {
+      lastOpenedCategory = category;
+      drawerTitleEl.textContent = "Catálogo · " + category;
+      drawerSubtitleEl.textContent = "Agregá varios productos. Después confirmás en el carrito (1 solo mensaje).";
+
+      const items = CATALOG[category] || [];
+      items.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        const top = document.createElement("div");
+        top.className = "product-top";
+
+        const name = document.createElement("div");
+        name.className = "product-name";
+        name.textContent = p.name;
+
+        const price = document.createElement("div");
+        price.className = "product-price";
+        price.textContent = money(p.price);
+
+        top.appendChild(name);
+        top.appendChild(price);
+
+        const desc = document.createElement("div");
+        desc.className = "product-desc";
+        desc.textContent = p.desc || "";
+
+        const actions = document.createElement("div");
+        actions.className = "product-actions";
+
+        let qty = 1;
+        const qtyWrap = document.createElement("div");
+        qtyWrap.className = "qty";
+
+        const minus = document.createElement("button");
+        minus.type = "button";
+        minus.textContent = "–";
+        minus.addEventListener("click", () => {
+          qty = Math.max(1, qty - 1);
+          qtyLabel.textContent = String(qty);
+        });
+
+        const qtyLabel = document.createElement("span");
+        qtyLabel.textContent = String(qty);
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.addEventListener("click", () => {
+          qty = Math.min(20, qty + 1);
+          qtyLabel.textContent = String(qty);
+        });
+
+        qtyWrap.appendChild(minus);
+        qtyWrap.appendChild(qtyLabel);
+        qtyWrap.appendChild(plus);
+
+        const add = document.createElement("button");
+        add.type = "button";
+        add.className = "add-btn";
+        add.textContent = "Agregar";
+        add.addEventListener("click", () => {
+          addToCart({ ...p, category }, qty);
+          syncCartUI();
+          setStatus(`Agregado ✅ (${cartTotals().items} ítems). Abrí 🛒 Carrito para confirmar.`);
+        });
+
+        actions.appendChild(qtyWrap);
+        actions.appendChild(add);
+
+        card.appendChild(top);
+        card.appendChild(desc);
+        card.appendChild(actions);
+
+        drawerBodyEl.appendChild(card);
+      });
+    }
+
+    function addToCart(product, qty) {
+      const existing = cart.find(i => i.name === product.name);
+      if (existing) existing.qty += qty;
+      else {
+        cart.push({
+          name: product.name,
+          qty: qty,
+          price: Number(product.price || 0),
+          category: product.category || ""
+        });
+      }
+      saveCart();
+    }
+
+    // ---- Cart render (WhatsApp: review + confirm) ----
+    function renderCart() {
+      drawerTitleEl.textContent = "Carrito";
+      drawerSubtitleEl.textContent = "Revisá tu pedido. Al confirmar, se envía 1 solo mensaje completo.";
+
+      drawerBodyEl.innerHTML = "";
+
+      if (!cart.length) {
+        const empty = document.createElement("div");
+        empty.className = "product-card";
+        empty.innerHTML = `
+          <div class="product-name">Tu carrito está vacío</div>
+          <div class="product-desc">Tocá una categoría para agregar productos y luego confirmá acá.</div>
+        `;
+        drawerBodyEl.appendChild(empty);
+        syncCartUI();
+        return;
+      }
+
+      cart.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "cart-item";
+
+        const top = document.createElement("div");
+        top.className = "cart-item-top";
+
+        const left = document.createElement("div");
+        const name = document.createElement("div");
+        name.className = "cart-item-name";
+        name.textContent = item.name;
+
+        const sub = document.createElement("div");
+        sub.className = "cart-item-sub";
+        sub.textContent = `${item.qty} × ${money(item.price)} · ${item.category || ""}`.trim();
+
+        left.appendChild(name);
+        left.appendChild(sub);
+
+        const right = document.createElement("div");
+        right.className = "cart-item-right";
+        right.textContent = money(item.price * item.qty);
+
+        top.appendChild(left);
+        top.appendChild(right);
+
+        const actions = document.createElement("div");
+        actions.className = "cart-item-actions";
+
+        const qtyWrap = document.createElement("div");
+        qtyWrap.className = "qty";
+
+        const minus = document.createElement("button");
+        minus.type = "button";
+        minus.textContent = "–";
+        minus.addEventListener("click", () => {
+          updateQty(item.name, item.qty - 1);
+          renderCart();
+        });
+
+        const qtyLabel = document.createElement("span");
+        qtyLabel.textContent = String(item.qty);
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.addEventListener("click", () => {
+          updateQty(item.name, item.qty + 1);
+          renderCart();
+        });
+
+        qtyWrap.appendChild(minus);
+        qtyWrap.appendChild(qtyLabel);
+        qtyWrap.appendChild(plus);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-btn";
+        remove.textContent = "Eliminar";
+        remove.addEventListener("click", () => {
+          removeItem(item.name);
+          renderCart();
+        });
+
+        actions.appendChild(qtyWrap);
+        actions.appendChild(remove);
+
+        row.appendChild(top);
+        row.appendChild(actions);
+
+        drawerBodyEl.appendChild(row);
+      });
+
+      syncCartUI();
+    }
+
+    function updateQty(name, newQty) {
+      const idx = cart.findIndex(i => i.name === name);
+      if (idx === -1) return;
+      if (newQty <= 0) cart.splice(idx, 1);
+      else cart[idx].qty = Math.min(99, newQty);
+      saveCart();
+      syncCartUI();
+    }
+
+    function removeItem(name) {
+      cart = cart.filter(i => i.name !== name);
+      saveCart();
+      syncCartUI();
+    }
+
+    // ---- Build ONE WhatsApp-like order message (single message) ----
+    function buildSingleOrderMessage() {
+      const t = cartTotals();
+      const lines = [];
+      lines.push("Pedido Burger House:");
+      cart.forEach(i => {
+        lines.push(`- ${i.qty}× ${i.name}`);
+      });
+      lines.push(`Total estimado: ${money(t.subtotal)}`);
+      // lines.push("Confirmo este pedido ✅");
+      return lines.join("\n");
+    }
+
+    // Cart / header actions
+    openCartBtn.addEventListener("click", () => openDrawer("cart"));
+
+    continueShoppingBtn.addEventListener("click", () => {
+      openDrawer("catalog");
+    });
+
+    clearCartBtn.addEventListener("click", () => {
+      clearCart();
+      renderCart();
+      setStatus("Carrito vaciado.");
+    });
+
+    sendOrderBtn.addEventListener("click", () => {
+      if (!cart.length) {
+        setStatus("Tu carrito está vacío.", true);
+        return;
+      }
+
+      // WhatsApp Business style: confirm => sends ONE message to chat + webhook
+      const orderText = buildSingleOrderMessage();
+
+      closeDrawer();
+      addMessage(orderText, "user");
+      sendToWebhook(orderText);
+
+      // After send, clear cart to mimic "sent order"
+      clearCart();
+      setStatus("Pedido enviado ✅");
+    });
+
+    // Text input still works (manual message)
+    formEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      inputEl.value = "";
+      addMessage(text, "user");
+      sendToWebhook(text);
+    });
+
+    // Welcome
+    setTimeout(() => {
+      addMessage("¡Hola! 👋 Bienvenido a Burger House.\n\nUsá el catálogo para seleccionar varios productos y luego confirmá en 🛒 Carrito (se envía 1 solo mensaje con el pedido completo).", "bot");
+    }, 450);
+
+    // Quick replies init
+    renderQuickReplies();
+
+    // Cart UI init
+    syncCartUI();
+  </script>
+</body>
+
+</html>

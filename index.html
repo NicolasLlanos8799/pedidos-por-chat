@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos por Chat | Automatizá tus pedidos 24/7</title>
+    <meta name="description"
+        content="Recibí pedidos automáticamente por WhatsApp, Instagram y Web. Sin comisiones y funcionando las 24 horas con tecnología de vanguardia.">
+    <meta name="keywords"
+        content="pedidos por chat, automatización de pedidos, whatsapp business, pedidos instagram, asistente de ventas, ecommerce automático">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Hello iAgency">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <style>
+        /* Custom adjustment for the iframe demo */
+        .demo-iframe-container {
+            width: 100%;
+            max-width: 375px;
+            height: 620px;
+            background: #fff;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .demo-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .demo-iframe-container {
+                max-width: 100% !important;
+                height: auto;
+                aspect-ratio: 9/16;
+                max-height: 600px;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-slate-800 antialiased">
+
+    <nav class="nav-sticky w-full py-3 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center gap-2">
+            <div class="font-bold text-lg md:text-2xl text-slate-900 flex items-center gap-2 min-w-0">
+                <div
+                    class="w-7 h-7 md:w-8 md:h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-md shrink-0">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 md:w-5 md:h-5 text-white"></i>
+                </div>
+                <span class="truncate">Pedidos <span class="text-indigo-600">por Chat</span></span>
+            </div>
+            <a href="#demo" title="Ver demostración de pedidos"
+                class="btn-primary text-white px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold shadow-lg shadow-indigo-100 transition whitespace-nowrap shrink-0">
+                Probar demo en vivo
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-gradient pt-16 pb-20 px-4 md:px-6 overflow-hidden border-b border-slate-50">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+            <div class="text-center md:text-left reveal">
+                <div
+                    class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                    <span class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></span>
+                    Ventas automáticas con IA 24/7
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.15] text-slate-900 mb-8">
+                    Recibí pedidos por chat de forma automática 24/7
+                </h1>
+                <p class="text-xl text-slate-600 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
+                    Gestioná tu menú, calificá clientes y confirmá ventas sin que tengas que estar pendiente del
+                    celular.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#demo" title="Ver demo"
+                        class="btn-primary flex items-center justify-center gap-2 text-white font-bold text-lg px-8 md:px-10 py-4 md:py-5 rounded-2xl shadow-xl shadow-indigo-100">
+                        Probar demo en vivo
+                        <i data-lucide="zap" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative mx-auto w-full max-w-xs md:max-w-sm reveal">
+                <div class="glow-effect">
+                    <div class="animate-float">
+                        <div
+                            class="bg-slate-50 rounded-[3rem] border-[10px] border-slate-900 shadow-2xl p-4 h-[450px] flex flex-col justify-end overflow-hidden relative ring-1 ring-slate-200">
+                            <!-- Notch/Mockup Header -->
+                            <div
+                                class="absolute top-0 left-0 w-full bg-slate-100 h-10 z-10 flex items-center justify-center">
+                                <div class="w-20 h-5 bg-slate-200 rounded-full"></div>
+                            </div>
+
+                            <div class="flex flex-col gap-4 pb-4 text-sm">
+                                <div
+                                    class="msg-anim delay-1 self-start bg-white p-4 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] border border-slate-100 text-slate-700">
+                                    Hola! Quiero una hamburguesa doble 🍔
+                                </div>
+                                <div
+                                    class="msg-anim delay-2 self-end bg-indigo-600 text-white p-4 rounded-2xl rounded-tr-none shadow-sm max-w-[85%]">
+                                    ¡Excelente elección! ¿La querés con papas o ensalada? 😊
+                                </div>
+                                <div
+                                    class="msg-anim delay-3 self-start bg-white p-4 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] border border-slate-100 text-slate-700">
+                                    Con papas, por favor.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bloque DOLOR -> SOLUCIÓN -->
+    <section class="py-20 md:py-32 bg-white px-4 md:px-6">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <div class="bg-rose-50 p-8 rounded-3xl border border-rose-100">
+                <h3 class="text-rose-600 font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="x-circle" class="w-5 h-5"></i> Problema
+                </h3>
+                <p class="text-rose-700 font-bold mb-6 text-lg leading-snug">
+                    El verdadero problema no es vender,<br>sino tener que tomar pedidos manualmente por chat.
+                </p>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-2"><span>❌</span> Alguien tiene que estar todo el día respondiendo
+                        mensajes</li>
+                    <li class="flex items-start gap-2"><span>❌</span> El chat interrumpe el trabajo operativo</li>
+                    <li class="flex items-start gap-2"><span>❌</span> En horas pico es imposible atender todo</li>
+                    <li class="flex items-start gap-2"><span>❌</span> Cuando nadie responde, las ventas se detienen</li>
+                </ul>
+            </div>
+            <div class="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
+                <h3 class="text-emerald-600 font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i> Solución
+                </h3>
+                <p class="text-emerald-700 font-bold mb-6 text-lg leading-snug">
+                    Pedidos por Chat elimina la necesidad de que una persona tome pedidos uno por uno.
+                </p>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-2"><span>✅</span> El asistente organiza el pedido automáticamente
+                    </li>
+                    <li class="flex items-start gap-2"><span>✅</span> Los clientes confirman todo en un solo mensaje
+                    </li>
+                    <li class="flex items-start gap-2"><span>✅</span> El negocio puede enfocarse en operar, no en
+                        responder chats</li>
+                    <li class="flex items-start gap-2"><span>✅</span> Las ventas continúan incluso cuando nadie está
+                        conectado</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-20 pb-32 md:pt-32 md:pb-48 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-4xl mx-auto px-6 reveal">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-10 text-center">
+                ¿Cómo funciona el sistema de pedidos?
+            </h2>
+            <div class="max-w-3xl mx-auto text-slate-600 text-lg md:text-xl leading-relaxed space-y-6">
+                <p>
+                    Primero configuramos el sistema con tu menú, precios, zonas de envío y métodos de pago.
+                </p>
+                <p>
+                    Cuando un cliente escribe por WhatsApp o Instagram, el sistema lo guía de forma natural en su
+                    compra, toma sus datos y te envía el pedido listo.
+                </p>
+
+                <p class="font-bold text-slate-900 !mb-4">
+                    Por ejemplo:
+                </p>
+                <ul class="space-y-4 pl-2">
+                    <li class="flex items-start gap-4">
+                        <div
+                            class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <span>Muestra el menú actualizado y resuelve dudas sobre productos</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div
+                            class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <span>Gestiona opciones de personalización (gustos, tamaños, etc)</span>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div
+                            class="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <span>
+                            Solicita dirección, confirma el total y el método de pago automáticamente
+                        </span>
+
+                    </li>
+                </ul>
+                <p class="pt-6">
+                    Todo sucede en segundos y sin que tengas que intervenir.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 md:py-32 bg-slate-900 px-4 md:px-6 text-center relative overflow-hidden">
+        <!-- Background Elements -->
+        <div
+            class="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-indigo-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-indigo-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none">
+        </div>
+
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 items-center justify-center">
+            <div class="text-left reveal w-full lg:w-1/2">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Probá cómo se toma un pedido en tiempo
+                    real</h2>
+                <p class="text-indigo-200 text-lg mb-10 font-light text-pretty">
+                    Este sistema funciona como los que implementamos: guía al usuario, gestiona el carrito y confirma la
+                    venta automáticamente.
+                </p>
+
+                <div class="bg-white/5 border border-white/10 p-5 rounded-3xl backdrop-blur-md mb-10 lg:mb-0 w-full">
+                    <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 bg-indigo-500/20 rounded-lg flex items-center justify-center text-indigo-400">
+                            <i data-lucide="info" class="w-5 h-5"></i>
+                        </div>
+                        💬 Hacé un pedido de ejemplo en el chat
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Este es un ejemplo real para WhatsApp, Instagram o Web.
+                        Aquí simulamos el chat de una hamburguesería para que veas la fluidez del proceso de pedido.
+                    </p>
+                    <p class="text-indigo-300/60 text-[10px] mb-6 italic">
+                        (Hacé clic en los botones para ver la demo)
+                    </p>
+                    <div class="space-y-3">
+                        <button type="button"
+                            class="example-msg-btn relative z-20 text-xs text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
+                            "Hola! Quiero ver el menú"
+                        </button>
+                        <button type="button"
+                            class="example-msg-btn relative z-20 text-xs text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
+                            "¿Tienen opciones vegetarianas?"
+                        </button>
+                        <button type="button"
+                            class="example-msg-btn relative z-20 text-xs text-indigo-200 flex w-full text-left items-center gap-3 bg-white/5 p-3 rounded-xl italic transition-all hover:bg-white/10 hover:translate-x-1 cursor-pointer border-none outline-none">
+                            "Quiero pedir una Burger House con papas"
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="demo" class="reveal w-full lg:w-1/2 flex justify-center">
+                <div class="demo-iframe-container">
+                    <iframe src="chat_demo_hamburgueseria.html" title="Demo de pedidos por chat"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 md:py-32 px-4 md:px-6 relative bg-white border-b border-slate-100">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-12">Ideal para cualquier negocio con delivery o pedidos
+            </h2>
+            <p class="text-slate-600 text-lg mb-12">
+                Pensado para locales que reciben pedidos todos los días por canales digitales y quieren escalar sus
+                ventas.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <span
+                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
+                        data-lucide="utensils" class="w-5 h-5 text-indigo-500"></i> Restaurantes</span>
+                <span
+                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
+                        data-lucide="pizza" class="w-5 h-5 text-emerald-500"></i> Pizzerías</span>
+                <span
+                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
+                        data-lucide="coffee" class="w-5 h-5 text-rose-500"></i> Cafeterías</span>
+                <span
+                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
+                        data-lucide="ice-cream" class="w-5 h-5 text-sky-500"></i> Heladerías</span>
+                <span
+                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
+                        data-lucide="shopping-bag" class="w-5 h-5 text-indigo-500"></i> Tiendas</span>
+                <span
+                    class="px-8 py-4 bg-slate-50 rounded-2xl font-bold text-slate-700 flex items-center gap-3 border border-slate-100"><i
+                        data-lucide="sparkles" class="w-5 h-5 text-fuchsia-500"></i> Otros</span>
+            </div>
+
+            <div class="mt-16 text-center reveal">
+                <a href="#demo" title="Ver demo"
+                    class="btn-primary inline-flex items-center justify-center gap-2 text-white font-bold text-lg px-10 py-5 rounded-2xl shadow-xl shadow-indigo-100">
+                    Probar demo en vivo
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 md:py-32 px-4 md:px-6 bg-slate-50">
+        <div class="max-w-4xl mx-auto reveal">
+            <header class="text-center mb-16">
+                <p class="text-indigo-600 font-bold text-xs uppercase tracking-widest mb-4">CONTACTO</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900">Automatizá tus pedidos hoy mismo</h2>
+            </header>
+
+            <form id="contactForm"
+                class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100"
+                action="https://formspree.io/f/xrbgpegn" method="POST">
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="flex flex-col gap-2">
+                        <label for="nombre" class="text-sm font-bold text-slate-700">Nombre y apellido</label>
+                        <input type="text" id="nombre" name="nombre"
+                            class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                            placeholder="Tu nombre..." required />
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="email" class="text-sm font-bold text-slate-700">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                            placeholder="tu@email.com" required />
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="flex flex-col gap-2">
+                        <label for="telefono" class="text-sm font-bold text-slate-700">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono"
+                            class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                            placeholder="+54..." />
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="empresa" class="text-sm font-bold text-slate-700">Negocio</label>
+                        <input type="text" id="empresa" name="empresa"
+                            class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+                            placeholder="Nombre de tu negocio..." />
+                    </div>
+                </div>
+
+
+                <div class="hidden mb-8 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-2xl text-center font-medium"
+                    id="contactSuccess">
+                    Gracias, recibimos tu solicitud. Nos contactaremos pronto 🙌
+                </div>
+
+                <div class="hidden mb-8 p-4 bg-rose-50 border border-rose-100 text-rose-700 rounded-2xl text-center font-medium"
+                    id="contactError">
+                    Hubo un problema al enviar la solicitud. Por favor, inténtalo de nuevo.
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <button type="submit"
+                        class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold px-12 py-5 rounded-2xl transition shadow-xl shadow-indigo-200"
+                        id="contactSubmitBtn">
+                        Solicitar ahora
+                    </button>
+                    <button type="button"
+                        class="w-full md:w-auto bg-white text-slate-500 font-bold px-8 py-5 rounded-2xl border border-slate-200 hover:bg-slate-50 transition"
+                        id="cancelBtn">
+                        Cancelar
+                    </button>
+                </div>
+
+                <p class="mt-6 text-xs text-slate-400 text-center">
+                    Al enviar esta solicitud, nos autorizas a contactarte por email o teléfono.
+                </p>
+
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-500 py-12 md:py-16 px-6 text-center text-sm">
+        <div class="max-w-6xl mx-auto">
+            <div class="font-bold text-2xl text-white mb-6">
+                Pedidos<span class="text-indigo-500 font-extrabold"> por Chat</span>
+            </div>
+
+            <p class="mb-8 max-w-md mx-auto text-slate-400">
+                La solución inteligente para escalar las ventas de tu negocio en canales digitales.
+            </p>
+
+            <div class="w-full h-px bg-slate-800 mb-8 opacity-50"></div>
+
+            <p>
+                &copy; 2026 Pedidos por Chat. Un producto de
+                <a href="https://www.helloiagency.com" target="_blank" title="iAgency"
+                    class="text-white hover:text-indigo-400 underline decoration-indigo-500/30 transition">
+                    iAgency
+                </a>.
+                Potenciando tu negocio con IA.
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="js/script.js" defer></script>
+</body>
+
+</html>
