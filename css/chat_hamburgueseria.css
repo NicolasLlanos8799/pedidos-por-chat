@@ -174,10 +174,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
-    background-blend-mode: multiply;
+    background-image: url('../img/chat-bg-dark.png');
+    background-size: 400px;
+    /* Adjust size for pattern */
+    background-repeat: repeat;
+    /* background-blend-mode removed to ensure visibility */
     background-color: #0b141a;
-    opacity: 0.96;
+    opacity: 1;
 }
 
 .message-row {
