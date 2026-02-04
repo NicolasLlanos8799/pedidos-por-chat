@@ -578,6 +578,8 @@ body {
     flex: 1;
     overflow-y: auto;
     background: var(--wa-bg-dark);
+    padding-bottom: 90px;
+    /* Ensure last item isn't covered by floating button */
 }
 
 /* Business Info */
@@ -807,27 +809,36 @@ body {
 }
 
 /* Sticky Bottom Cart Button (Catalog Mode) */
+/* Sticky Bottom Cart Button (Catalog Mode) */
 .floating-cart-btn {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 24px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    /* Auto width to fill space (left+right set) */
     background: #25D366;
     color: white;
-    padding: 16px;
     border: none;
-    font-weight: 600;
+    border-radius: 24px;
+    /* Pill shape */
+    padding: 14px 20px;
     font-size: 16px;
-    display: none;
-    /* Controlled by JS */
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    z-index: 50;
-    border-radius: 0;
-    /* Full width edge-to-edge */
-    text-align: center;
-    width: 100%;
+    transform: translateY(200%);
+    opacity: 0;
+    pointer-events: none;
+    /* Hidden by default */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Summary styles for Dark Cart */
@@ -854,7 +865,9 @@ body {
 }
 
 .floating-cart-btn.visible {
-    display: block;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* DARK MODE (Cart Screen) */

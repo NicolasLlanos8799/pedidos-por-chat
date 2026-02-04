@@ -80,7 +80,7 @@ document.addEventListener("click", e => {
     }
 
     // Send to iframe
-    const iframe = document.querySelector(".demo-iframe-container iframe");
+    const iframe = document.querySelector("#demo iframe");
     if (iframe && iframe.contentWindow) {
         iframe.contentWindow.postMessage({ type: "DEMO_MSG", text: text }, "*");
     }

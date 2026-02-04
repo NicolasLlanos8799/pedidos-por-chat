@@ -209,7 +209,6 @@
         // ---- Webhook ----
         async function sendToWebhook(text) {
             showTypingIndicator();
-            setStatus("Enviando...");
 
             try {
                 // Fixed Payload structure matching the working version
@@ -567,15 +566,22 @@
                 sendToWebhook(text);
             });
 
-            // Handle button click directly if outside form submit scope (though it is type=submit)
+            // Handle button click directly
             if (sendBtn) {
                 sendBtn.addEventListener("click", (e) => {
-                    // If mic mode, prevent submit if logic requires
                     const text = inputEl.value.trim();
                     if (!text) {
                         e.preventDefault();
-                        // alert("Nota de voz no disponible en demo.");
+                        console.log("Mic clicked (voice not implemented)");
+                        return;
                     }
+
+                    // If text exists, send message
+                    e.preventDefault();
+                    inputEl.value = "";
+                    updateSendButtonState();
+                    addMessage(text, "user");
+                    sendToWebhook(text);
                 });
             }
         }
@@ -602,7 +608,6 @@
                 closeDrawer();
 
                 addMessage(orderText, "user");
-                setStatus("Procesando pedido...");
 
                 console.log("About to call sendToWebhook with:", orderText);
                 sendToWebhook(orderText)
