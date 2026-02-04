@@ -59,16 +59,30 @@ if (contactForm) {
 // ================================
 // EXAMPLE BUTTONS -> IFRAME INTERACTION
 // ================================
+// EXAMPLE BUTTONS -> IFRAME INTERACTION
+// ================================
 document.addEventListener("click", e => {
     const btn = e.target.closest(".example-msg-btn");
     if (!btn) return;
 
     e.preventDefault();
 
+    // extract text without quotes
+    let text = btn.textContent.trim();
+    if (text.startsWith('"') && text.endsWith('"')) {
+        text = text.substring(1, text.length - 1);
+    }
+
     // Scroll to chat
     const demoSection = document.getElementById("demo");
     if (demoSection) {
         demoSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    // Send to iframe
+    const iframe = document.querySelector(".demo-iframe-container iframe");
+    if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ type: "DEMO_MSG", text: text }, "*");
     }
 });
 

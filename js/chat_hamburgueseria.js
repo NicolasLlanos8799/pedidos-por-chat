@@ -633,10 +633,21 @@
 
         // Init Logic
         setTimeout(() => {
-            addMessage("¡Hola! 👋 Bienvenido a Burger House.\n\nUsá el catálogo para seleccionar varios productos y luego confirmá en 🛒 Carrito (se envía 1 solo mensaje con el pedido completo).", "bot");
+            addMessage("¡Hola! 👋\nEstás viendo una simulación de WhatsApp.\n1️⃣ Elegí productos desde el catálogo\n2️⃣ Confirmá el pedido en el carrito 🛒\n3️⃣ El pedido se envía como un mensaje único, y el asistente responde automáticamente.", "bot");
         }, 450);
 
         syncCartUI();
+
+        // Listen for messages from parent window (Demo Buttons)
+        window.addEventListener("message", (event) => {
+            if (event.data && event.data.type === "DEMO_MSG") {
+                const text = event.data.text;
+                if (text) {
+                    addMessage(text, "user");
+                    sendToWebhook(text);
+                }
+            }
+        });
     }
 
     // Robust initialization
