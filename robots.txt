@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asistente-ventas.helloiagency.com/sitemap.xml
