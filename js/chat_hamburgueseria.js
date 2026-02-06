@@ -248,6 +248,7 @@
             }
         }
 
+
         // ---- Drawer Helper ----
         function openDrawer(mode) {
             if (!drawerEl) return;
@@ -564,6 +565,9 @@
                 updateSendButtonState(); // Reset to Mic
                 addMessage(text, "user");
                 sendToWebhook(text);
+
+                // GA4 Tracking Event
+                window.parent.postMessage({ type: "DEMO_MESSAGE_SENT", message_type: "text_message" }, "*");
             });
 
             // Handle button click directly
@@ -582,6 +586,9 @@
                     updateSendButtonState();
                     addMessage(text, "user");
                     sendToWebhook(text);
+
+                    // GA4 Tracking Event
+                    window.parent.postMessage({ type: "DEMO_MESSAGE_SENT", message_type: "text_message" }, "*");
                 });
             }
         }
@@ -613,6 +620,13 @@
                 sendToWebhook(orderText)
                     .then(() => {
                         console.log("Order sent successfully");
+
+                        // GA4 Conversion Event (Real Intent)
+                        window.parent.postMessage({
+                            type: "DEMO_ORDER_SENT",
+                            items: cart.length
+                        }, "*");
+
                         clearCart();
                     })
                     .catch(e => {
@@ -653,6 +667,9 @@
                 }
             }
         });
+
+        // Notify parent that demo is ready
+        window.parent.postMessage({ type: "DEMO_READY", demo_type: "restaurant_simulation" }, "*");
     }
 
     // Robust initialization
