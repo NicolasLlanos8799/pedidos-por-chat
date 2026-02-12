@@ -149,7 +149,63 @@
             bubble.className = from === "user" ? "message-bubble user-bubble" : "message-bubble bot-bubble";
 
             const content = document.createElement("div");
-            content.textContent = text;
+
+            // Render TEXT or ACTION BUTTON based on specific line matching
+            // We split by newlines to respect line breaks and identify the action line
+            const lines = text.split('\n');
+
+            lines.forEach((line, index) => {
+                const cleanLine = line.trim();
+
+                // Check for catalog trigger: "Ver catálogo" (case-insensitive)
+                const isCatalogTrigger = /ver cat[áa]logo/i.test(cleanLine);
+
+                if (from === "bot" && isCatalogTrigger) {
+                    const btn = document.createElement("button");
+                    btn.className = "primary-btn";
+
+                    // Keep original text, but maybe clean it up if it's too long?
+                    // User requirement: "Cualquier línea que contenga “Ver catálogo”"
+                    // User also said: "Mantener textContent para el resto de líneas".
+                    // For the button text, let's execute the user request:
+                    // "En vez de mostrar esa línea como texto, reemplazarla por un elemento clickeable: un botón... texto 'Ver catálogo'"
+                    // Wait, the user said: "Opción recomendada: un botón ... texto “Ver catálogo”."
+                    // So I should probably set the text to "Ver catálogo" explicitly instead of the full line if it contains a URL.
+                    // However, the example shows: "👉 Ver catálogo: https://..."
+                    // If I replace line with button "Ver catálogo", the URL info is hidden (which is fine as it's the target).
+                    // Let's set the text to "Ver catálogo" to be clean, or "👉 Ver catálogo" if passing the emoji.
+                    // Actually, let's keep it simple: "Ver catálogo" as user requested text.
+
+                    btn.textContent = "Ver catálogo";
+
+                    // Extract URL if present, but prioritize local catalog for specific domain
+                    const urlMatch = cleanLine.match(/(https?:\/\/\S+)/);
+                    let targetUrl = urlMatch ? urlMatch[0] : "catalogo.html";
+
+                    // User requested to use local file instead of this specific external URL
+                    if (targetUrl.includes("catalogo.helloiagency.com")) {
+                        targetUrl = "catalogo.html";
+                    }
+
+                    // Inline styles to fit message bubble better
+                    btn.style.marginTop = "8px";
+                    btn.style.width = "auto";
+                    btn.style.padding = "8px 16px";
+                    btn.style.fontSize = "14px";
+                    btn.style.display = "inline-block";
+
+                    btn.onclick = () => window.openCatalog(targetUrl);
+
+                    content.appendChild(btn);
+                } else {
+                    // Regular text line
+                    const span = document.createElement("div");
+                    span.textContent = line;
+                    // Preserve empty lines visually
+                    if (line === '') span.style.minHeight = '1em';
+                    content.appendChild(span);
+                }
+            });
 
             const meta = document.createElement("div");
             meta.className = "msg-meta";
@@ -206,8 +262,47 @@
             typingRow = null;
         }
 
-        // ---- Webhook ----
+        // ---- Catalog Modal Logic ----
+        const catalogModal = document.getElementById("catalogModal");
+        const catalogFrame = document.getElementById("catalogFrame");
+        const closeCatalogBtn = document.getElementById("closeCatalogBtn");
+
+        function openCatalogModal(url) {
+            if (!catalogModal) return;
+
+            // Determine URL (use passed url if string, else default)
+            // handle event object being passed by onclick if no args
+            let targetSrc = "catalogo.html";
+            if (typeof url === "string" && url.trim().length > 0) {
+                targetSrc = url.trim();
+            }
+
+            // Always update src to ensure we load the right content
+            // Check if current src is different to avoid reload if same (optional, but good for perf)
+            // But if user wants to ensure it opens "that" catalog, maybe force it?
+            // Let's update it.
+            if (catalogFrame.getAttribute("src") !== targetSrc) {
+                catalogFrame.src = targetSrc;
+            }
+
+            catalogModal.style.display = "flex";
+        }
+
+        function closeCatalogModal() {
+            if (!catalogModal) return;
+            catalogModal.style.display = "none";
+        }
+
+        if (closeCatalogBtn) {
+            closeCatalogBtn.addEventListener("click", closeCatalogModal);
+        }
+
+        // Expose for usage in button onclick
+        window.openCatalog = openCatalogModal;
+
+        // ---- Webhook & Message Logic ----
         async function sendToWebhook(text) {
+            // NOTE: Removed local interception. We rely 100% on n8n for responses.
             showTypingIndicator();
 
             try {
@@ -249,8 +344,13 @@
         }
 
 
-        // ---- Drawer Helper ----
+        // ---- Drawer Helper (Legacy/Internal Chat Cart) ----
         function openDrawer(mode) {
+            // ... (Existing Drawer Logic kept if needed, although we are moving to external catalog)
+            // For this task, we focus on the external catalog flow.
+            // If user clicks internal cart buttons, we could also redirect to external catalog or keep internal logic.
+            // The prompt says "Simulate flow using external catalog".
+            // Let's assume internal specific buttons (if any left valid) still work, but main flow is external.
             if (!drawerEl) return;
             drawerMode = mode;
             drawerEl.classList.add("open");
@@ -289,7 +389,7 @@
                 renderCart();
             }
         }
-        // expose to window if needed by inline handlers (though we removed them)
+        // expose to window if needed by inline handlers
         window.openDrawer = openDrawer;
 
         function closeDrawer() {
@@ -304,6 +404,8 @@
 
         // ---- Catalog Render ----
         function renderCatalog() {
+            // ... existing renderCatalog logic ...
+            // (We keep this for fallback or mixed use, but the external catalog is priority)
             drawerBodyEl.innerHTML = "";
             Object.keys(CATALOG).forEach(category => {
                 const catHead = document.createElement("div");
@@ -361,6 +463,7 @@
         }
 
         function addToCart(product, qty) {
+            // ... existing addToCart logic ...
             const existing = cart.find(i => i.name === product.name);
             if (existing) existing.qty += qty;
             else {
@@ -376,6 +479,7 @@
 
         // ---- Cart Render ----
         function renderCart() {
+            // ... existing renderCart logic ...
             drawerBodyEl.innerHTML = "";
 
             if (!cart.length) {
@@ -482,6 +586,7 @@
         }
 
         function updateQty(name, newQty) {
+            // ... existing updateQty logic ...
             const idx = cart.findIndex(i => i.name === name);
             if (idx === -1) return;
             if (newQty <= 0) cart.splice(idx, 1);
@@ -491,12 +596,14 @@
         }
 
         function removeItem(name) {
+            // ... existing removeItem logic ...
             cart = cart.filter(i => i.name !== name);
             saveCart();
             syncCartUI();
         }
 
         function buildSingleOrderMessage() {
+            // ... (Keep existing if needed, though external catalog sends formatted text) ...
             const t = cartTotals();
             const lines = [];
             lines.push("Pedido Burger House:");
@@ -593,54 +700,33 @@
             }
         }
 
-        // Send Order
+        // Send Order (Legacy Internal Button)
         if (sendOrderBtn) {
-            console.log("sendOrderBtn found, attaching listener");
+            // ... (kept for backward compatibility with internal cart if button exists)
             sendOrderBtn.addEventListener("click", (e) => {
                 e.preventDefault();
-                console.log("Realizar pedido clicked. Items:", cart.length);
-
                 if (!cart.length) {
                     setStatus("Tu carrito está vacío.", true);
                     return;
                 }
-
                 const originalText = sendOrderBtn.textContent;
                 sendOrderBtn.textContent = "Procesando...";
                 sendOrderBtn.disabled = true;
-
                 const orderText = buildSingleOrderMessage();
-
-                // Close drawer first to return to chat
                 closeDrawer();
-
                 addMessage(orderText, "user");
-
-                console.log("About to call sendToWebhook with:", orderText);
                 sendToWebhook(orderText)
                     .then(() => {
-                        console.log("Order sent successfully");
-
-                        // GA4 Conversion Event (Real Intent)
-                        window.parent.postMessage({
-                            type: "DEMO_ORDER_SENT",
-                            items: cart.length
-                        }, "*");
-
                         clearCart();
+                        // GA4 Conversion
+                        window.parent.postMessage({ type: "DEMO_ORDER_SENT", items: cart.length }, "*");
                     })
-                    .catch(e => {
-                        console.error("Order send failed", e);
-                        setStatus("Error al enviar.", true);
-                    })
+                    .catch(e => setStatus("Error al enviar.", true))
                     .finally(() => {
                         sendOrderBtn.textContent = originalText;
                         sendOrderBtn.disabled = false;
-                        // Note: success status is set inside sendToWebhook
                     });
             });
-        } else {
-            console.error("sendOrderBtn NOT FOUND!");
         }
 
         // Floating Chat Cart Button Click
@@ -652,18 +738,31 @@
 
         // Init Logic
         setTimeout(() => {
-            addMessage("¡Hola! 👋\nEstás viendo una simulación de WhatsApp.\n1️⃣ Elegí productos desde el catálogo\n2️⃣ Confirmá el pedido en el carrito 🛒\n3️⃣ El pedido se envía como un mensaje único, y el asistente responde automáticamente.", "bot");
+            addMessage("¡Hola! 👋\nEsta es una simulación de WhatsApp para tomar pedidos automáticamente.\n\n✍️ Escribí \"Quiero hacer un pedido\" para comenzar.\nEl asistente te guiará paso a paso.", "bot");
         }, 450);
+
+
 
         syncCartUI();
 
         // Listen for messages from parent window (Demo Buttons)
         window.addEventListener("message", (event) => {
+            // Existing Demo logic
             if (event.data && event.data.type === "DEMO_MSG") {
                 const text = event.data.text;
                 if (text) {
                     addMessage(text, "user");
                     sendToWebhook(text);
+                }
+            }
+
+            // NEW: Listen for messages from External Catalog via Iframe
+            if (event.data && event.data.type === "ORDER_FROM_CATALOG") {
+                const orderText = event.data.text;
+                if (orderText) {
+                    closeCatalogModal();
+                    addMessage(orderText, "user");
+                    sendToWebhook(orderText); // Process as if user typed it
                 }
             }
         });

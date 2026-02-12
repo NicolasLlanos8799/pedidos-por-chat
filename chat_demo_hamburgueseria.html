@@ -23,7 +23,7 @@
 
       <div class="header-right">
         <button class="cart-btn" id="openCartBtn" type="button" aria-label="Abrir catálogo">
-          <svg xmlns="http://www.w3.org/2000/svg" class="store-icon" viewBox="0 0 256 256" fill="currentColor">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" class="store-icon" viewBox="0 0 256 256" fill="currentColor">
             <g transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
               <path
                 d="M 70.877 82.59 h -18.55 c -0.553 0 -1 -0.447 -1 -1 V 52.767 c 0 -4.767 3.878 -8.644 8.644 -8.644 h 3.262 c 4.767 0 8.645 3.877 8.645 8.644 V 81.59 C 71.877 82.143 71.43 82.59 70.877 82.59 z M 53.327 80.59 h 16.55 V 52.767 c 0 -3.663 -2.98 -6.645 -6.645 -6.645 h -3.262 c -3.663 0 -6.644 2.981 -6.644 6.645 V 80.59 z"
@@ -38,8 +38,8 @@
                 style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: currentColor; fill-rule: nonzero; opacity: 1;"
                 stroke-linecap="round" />
             </g>
-          </svg>
-          <span class="cart-badge" id="cartCount">0</span>
+          </svg> -->
+          <!-- <span class="cart-badge" id="cartCount">0</span> -->
         </button>
         <div class="badge" id="negocioLabel" style="display:none"></div>
       </div>
@@ -116,7 +116,7 @@
           </div>
           <div id="drawerTitle">Catálogo</div>
           <div class="right-actions">
-            <button class="cart-btn" id="drawerCartBtn" type="button" style="font-size:22px">🛒</button>
+            <button class="cart-btn" id="drawerCartBtn" type="button" style="font-size:22px"></button>
           </div>
         </header>
 
@@ -154,6 +154,14 @@
           <button class="primary-btn" id="sendOrderBtn" type="button">Realizar pedido</button>
           <div class="disclaimer">Los precios pueden variar según el local.</div>
         </div>
+      </div>
+    </div>
+
+    <!-- External Catalog Modal -->
+    <div id="catalogModal" class="catalog-modal" style="display:none;">
+      <div class="catalog-modal-content">
+        <button id="closeCatalogBtn" class="catalog-close-btn" aria-label="Cerrar catálogo">×</button>
+        <iframe id="catalogFrame" src="" frameborder="0"></iframe>
       </div>
     </div>
 

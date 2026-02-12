@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Catálogo - Burger House</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="css/chat_hamburgueseria.css?v=2">
+    <style>
+        /* Force drawer to be visible as the main page */
+        .drawer {
+            display: flex !important;
+            position: relative;
+            /* Changing from absolute to relative for main page flow if needed, though absolute inset=0 works for full page app feel */
+            height: 100vh;
+        }
+
+        body {
+            background-color: var(--wa-bg-dark);
+            /* Ensure body matches drawer background */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Drawer (Catalog / Cart Screen) - Adapted for Standalone Use -->
+    <div class="drawer open" id="drawer">
+        <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Pantalla de Catálogo">
+            <header class="drawer-header">
+                <!-- No "Cancel" button needed for standalone page unless we want to link back to something -->
+                <div class="left-actions">
+                </div>
+                <div id="drawerTitle">Catálogo</div>
+                <div class="right-actions">
+                    <button class="cart-btn" id="drawerCartBtn" type="button"
+                        style="font-size:22px; display:block;"></button>
+                </div>
+            </header>
+
+            <div class="drawer-body" id="drawerBodyScrollContainer">
+                <!-- Business Info (Only shown in catalog mode) -->
+                <div id="businessInfo" style="display:block">
+                    <div class="biz-banner">
+                        <img src="img/burger_house_banner_1770054754913.png" alt="Burger House Banner">
+                    </div>
+                    <div class="biz-details">
+                        <h2>Burger House</h2>
+                        <p>Las mejores hamburguesas gourmet de la ciudad, elaboradas con ingredientes frescos y carne de
+                            primera
+                            calidad.</p>
+                        <p style="margin-top:8px"><span style="color:var(--wa-header)">📍</span> Microcentro, Rosario
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dynamic content -->
+                <div id="drawerBody"></div>
+            </div>
+
+            <!-- Sticky Bottom Cart Button (Catalog Mode Only) -->
+            <button id="floatingCartBtn" class="floating-cart-btn" type="button">
+                Ver carrito (<span id="floatingCartCount">0</span>)
+            </button>
+
+            <!-- Cart Footer (Cart Mode Only) -->
+            <div class="drawer-footer" id="drawerFooter" style="display:none;">
+                <div class="summary-container">
+                    <div class="summary-row total">
+                        <span>Total estimado</span>
+                        <span id="cartTotalLabel">US$ 0.00</span>
+                    </div>
+                </div>
+                <button class="primary-btn" id="sendOrderBtn" type="button">Realizar pedido</button>
+                <div class="disclaimer">Los precios pueden variar según el local.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/catalogo.js"></script>
+</body>
+
+</html>
