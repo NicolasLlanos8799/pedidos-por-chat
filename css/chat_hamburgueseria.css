@@ -515,7 +515,8 @@ body {
     position: absolute;
     inset: 0;
     display: none;
-    background: var(--wa-bg-dark);
+    background: #e9edef;
+    /* WhatsApp Light Background */
     z-index: 100;
 }
 
@@ -529,7 +530,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: var(--wa-bg-dark);
+    background: #e9edef;
 }
 
 .drawer-header {
@@ -537,11 +538,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #202c33;
+    background: #008069;
+    /* WA Brand Green for Header */
     color: white;
     min-height: 56px;
-    z-index: 10;
-    border-bottom: 1px solid #232d36;
+    z-index: 20;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+    flex-shrink: 0;
 }
 
 .drawer-header .left-actions {
@@ -562,7 +566,9 @@ body {
     font-size: 19px;
     font-weight: 500;
     text-align: center;
+    /* WhatsApp style usually aligns title left if back btn exists, or center. Let's keep center or adjust. User asked for structure. */
     flex: 2;
+    padding-left: 0;
 }
 
 .drawer-close {
@@ -572,80 +578,96 @@ body {
     font-size: 16px;
     cursor: pointer;
     padding: 8px 0;
+    display: flex;
+    align-items: center;
 }
 
 .drawer-body {
     flex: 1;
     overflow-y: auto;
-    background: var(--wa-bg-dark);
+    background: #e9edef;
     padding-bottom: 90px;
-    /* Ensure last item isn't covered by floating button */
 }
 
 /* Business Info */
 .biz-banner {
     width: 100%;
-    height: 200px;
+    height: 180px;
+    /* Controlled height */
     overflow: hidden;
-    background: #f0f2f5;
+    background: #cfd8dc;
+    position: relative;
 }
 
 .biz-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .biz-details {
-    padding: 20px 16px;
-    border-bottom: 8px solid #f0f2f5;
+    padding: 16px;
+    background: white;
+    margin-bottom: 8px;
+    /* Separation from products */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .biz-details h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 4px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111b21;
+    margin-bottom: 6px;
 }
 
 .biz-details p {
-    font-size: 14.5px;
-    color: #8696a0;
+    font-size: 14px;
+    color: #54656f;
     line-height: 1.4;
+    margin: 0;
 }
 
 /* Lists Header */
 .category-header {
-    padding: 20px 16px 8px;
+    padding: 16px 16px 8px;
+    background: #e9edef;
 }
 
 .category-header h3 {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    color: #667781;
+    color: #54656f;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* Flat Product Row */
+/* Product Card */
 .product-card {
     display: flex;
     padding: 12px 16px;
-    gap: 16px;
-    background: var(--wa-bg-dark);
-    border-bottom: 1px solid #232d36;
+    gap: 12px;
+    background: white;
+    border-bottom: 1px solid #e9edef;
+    cursor: pointer;
+    position: relative;
+}
+
+.product-card:last-child {
+    border-bottom: none;
 }
 
 .product-img {
-    width: 60px;
-    height: 60px;
-    border-radius: 4px;
-    background: #232d36;
+    width: 68px;
+    height: 68px;
+    border-radius: 8px;
+    background: #f0f2f5;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 32px;
     flex-shrink: 0;
+    color: #54656f;
 }
 
 .product-info {
@@ -656,51 +678,58 @@ body {
     justify-content: center;
 }
 
-.product-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2px;
-}
-
 .product-name {
     font-size: 16px;
     font-weight: 500;
-    color: white;
+    color: #111b21;
+    margin-bottom: 4px;
+    line-height: 1.2;
 }
 
 .product-desc {
     font-size: 14px;
-    color: #8696a0;
-    white-space: nowrap;
+    color: #54656f;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    white-space: normal;
+    /* Fix truncation issue */
 }
 
 .product-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2px;
 }
 
 .product-price {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    color: white;
+    color: #111b21;
 }
 
 .add-btn-circle {
-    width: 28px;
-    height: 28px;
-    background: #00a884;
-    color: white;
+    width: 32px;
+    height: 32px;
+    background: #f0f2f5;
+    color: #008069;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-btn-circle:active {
+    background: #d9dce0;
 }
 
 /* Cart Screen Styles */
@@ -950,4 +979,55 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+/* Catalog Modal Overlay */
+.catalog-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.catalog-modal-content {
+    width: 95%;
+    height: 95%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.catalog-modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
