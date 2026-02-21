@@ -157,8 +157,8 @@
             lines.forEach((line, index) => {
                 const cleanLine = line.trim();
 
-                // Check for catalog trigger: "Ver catálogo" (case-insensitive)
-                const isCatalogTrigger = /ver cat[áa]logo/i.test(cleanLine);
+                // Check for catalog trigger: "Ver catálogo" (case-insensitive) or URL
+                const isCatalogTrigger = /ver cat[áa]logo/i.test(cleanLine) || cleanLine.includes("catalogo.helloiagency.com");
 
                 if (from === "bot" && isCatalogTrigger) {
                     const btn = document.createElement("button");
@@ -738,7 +738,7 @@
 
         // Init Logic
         setTimeout(() => {
-            addMessage("¡Hola! 👋\nEsta es una simulación de WhatsApp para tomar pedidos automáticamente.\n\n✍️ Escribí \"Quiero hacer un pedido\" para comenzar.\nLeo, tu asistente, te guiará paso a paso.", "bot");
+            addMessage("¡Hola! 👋\nEsta es una simulación de WhatsApp para tomar pedidos automáticamente.\n\n✍️ Escribí \"Quiero hacer un pedido\" para comenzar.\nEl asistente te guiará paso a paso.", "bot");
         }, 450);
 
 
