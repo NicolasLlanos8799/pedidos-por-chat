@@ -3,7 +3,7 @@
     function initChat() {
         // --- LÓGICA DE NEGOCIO ORIGINAL CONSERVARADA ---
         // NO MODIFICAR: webhook / ids / payload
-        const WEBHOOK_URL = "https://nicolasllanossw10.app.n8n.cloud/webhook/iagency/webchat";
+        const WEBHOOK_URL = "https://n8n.srv1409578.hstgr.cloud/webhook/iagency/webchat";
         const BUSINESS_ID = "burger_house";
         const USER_ID = "cliente_" + Math.random().toString(36).slice(2, 6);
 
@@ -738,7 +738,7 @@
 
         // Init Logic
         setTimeout(() => {
-            addMessage("¡Hola! 👋\nEsta es una simulación de WhatsApp para tomar pedidos automáticamente.\n\n✍️ Escribí \"Quiero hacer un pedido\" para comenzar.\nEl asistente te guiará paso a paso.", "bot");
+            addMessage("¡Hola! 👋\nEsta es una simulación de WhatsApp para tomar pedidos automáticamente.\n\n✍️ Escribí \"Quiero hacer un pedido\" para comenzar.\nLeo, tu asistente, te guiará paso a paso.", "bot");
         }, 450);
 
 
