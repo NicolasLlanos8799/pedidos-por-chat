@@ -343,7 +343,7 @@
                 }
 
                 const lines = [];
-                lines.push("🛒 Pedido desde catálogo:");
+                lines.push("🛒 Pedido desde el carrito:");
                 cart.forEach(i => {
                     lines.push(`• ${i.qty}x ${i.name}`);
                 });
