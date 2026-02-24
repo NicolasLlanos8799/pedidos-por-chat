@@ -178,14 +178,12 @@
 
                     btn.textContent = "Ver catálogo";
 
-                    // Extract URL if present, but prioritize local catalog for specific domain
+                    // Extract URL if present, but always prioritize local catalog for the demo
                     const urlMatch = cleanLine.match(/(https?:\/\/\S+)/);
-                    let targetUrl = urlMatch ? urlMatch[0] : "catalogo.html";
+                    let targetUrl = "catalogo.html"; // We force local file
 
-                    // User requested to use local file instead of this specific external URL
-                    if (targetUrl.includes("catalogo.helloiagency.com")) {
-                        targetUrl = "catalogo.html";
-                    }
+                    // If we wanted to parse it we could, but to avoid caching/external code we hardcode it
+
 
                     // Inline styles to fit message bubble better
                     btn.style.marginTop = "8px";
